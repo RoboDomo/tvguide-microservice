@@ -1,0 +1,35 @@
+{
+  "name": "tvguide-microservice",
+  "version": "1.0.0",
+  "description": "TV Guide microservice for autodomo",
+  "main": "index.js",
+  "scripts": {
+    "start": "forever ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/autodomo/tvguide-microservice.git"
+  },
+  "keywords": [
+    "autodomo",
+    "tv",
+    "guide",
+    "mqtt",
+    "schedules",
+    "direct"
+  ],
+  "author": "Michael Schwartz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/autodomo/tvguide-microservice/issues"
+  },
+  "homepage": "https://github.com/autodomo/tvguide-microservice#readme",
+  "dependencies": {
+    "debug": "^2.6.8",
+    "microservice-core": "github:autodomo/microservice-core",
+    "mongoose": "^4.11.5",
+    "mqtt": "^2.9.3",
+    "superagent": "^3.5.2"
+  }
+}
