@@ -29,7 +29,7 @@
     "debug": "^2.6.8",
     "microservice-core": "github:autodomo/microservice-core",
     "mongoose": "^4.11.5",
-    "mqtt": "^2.9.3",
+    "mqtt": "^2.11.0",
     "superagent": "^3.5.2"
   }
 }
