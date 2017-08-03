@@ -53,6 +53,8 @@ class TVGuideHost extends HostBase {
             }
             catch (e) {
                 console.log(this.device, 'poll exception', e)
+                this.token = null
+                await this.wait(5000)
             }
         }
     }
@@ -108,7 +110,7 @@ class TVGuideHost extends HostBase {
 
     }
 
-    async get(command) {
+    async get (command) {
         if (!this.token) {
             Promise.reject('TVGuideHost: no token')
         }
@@ -200,45 +202,43 @@ class TVGuideHost extends HostBase {
             await this.getToken()
         }
 
-        if (!this.map) {
-            try {
-                await this.subscribe()
-            } catch (e) {
-                // may already be subscribed, ignore error
-            }
+        try {
+            await this.subscribe()
+        } catch (e) {
+            // may already be subscribed, ignore error
+        }
 
-            try {
-                const channels   = await this.channels()
-                const stationIds = {}
-                channels.stations.forEach((item) => {
-                    stationIds[item.stationID] = item
-                })
-                const map = {}
-                channels.map.forEach((item) => {
-                    const info = stationIds[item.stationID]
+        try {
+            const channels   = await this.channels()
+            const stationIds = {}
+            channels.stations.forEach((item) => {
+                stationIds[item.stationID] = item
+            })
+            const map = {}
+            channels.map.forEach((item) => {
+                const info = stationIds[item.stationID]
 
-                    try {
-                        // if (info.broadcastLanguage.indexOf('en') !== -1) { // } && Number(item.channel > 500)) {
-                        map[channel(item.channel)] = info
-                        // }
-                    }
-                    catch (e) {
-                        console.dir(e)
-                        map[channel(item.channel)] = info
-                    }
+                try {
+                    // if (info.broadcastLanguage.indexOf('en') !== -1) { // } && Number(item.channel > 500)) {
+                    map[channel(item.channel)] = info
+                    // }
+                }
+                catch (e) {
+                    console.dir(e)
+                    map[channel(item.channel)] = info
+                }
 
-                })
-                this.channels = map
-                debug(this.device, 'Got TV Guide')
-                const newData = Object.assign({_id: this.guideId, timestamp: new Date()}, {
-                    channels: channels,
-                    mapped:   this.channels
-                })
-                return this.channels
-            }
-            catch (e) {
-                debug('getChannels error', e)
-            }
+            })
+            this.map = map
+            debug(this.device, 'Got TV Guide')
+            const newData = Object.assign({_id: this.guideId, timestamp: new Date()}, {
+                channels: channels,
+                mapped:   this.map
+            })
+            return this.map
+        }
+        catch (e) {
+            debug('getChannels error', e)
         }
     }
 }
