@@ -1,7 +1,7 @@
 {
   "name": "tvguide-microservice",
   "version": "1.0.0",
-  "description": "TV Guide microservice for autodomo",
+  "description": "TV Guide microservice for robodomo",
   "main": "index.js",
   "scripts": {
     "start": "forever ./index.js",
@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/autodomo/tvguide-microservice.git"
+    "url": "git+https://github.com/robodomo/tvguide-microservice.git"
   },
   "keywords": [
-    "autodomo",
+    "robodomo",
     "tv",
     "guide",
     "mqtt",
@@ -22,12 +22,12 @@
   "author": "Michael Schwartz",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/autodomo/tvguide-microservice/issues"
+    "url": "https://github.com/robodomo/tvguide-microservice/issues"
   },
-  "homepage": "https://github.com/autodomo/tvguide-microservice#readme",
+  "homepage": "https://github.com/robodomo/tvguide-microservice#readme",
   "dependencies": {
     "debug": "^2.6.8",
-    "microservice-core": "github:autodomo/microservice-core",
+    "microservice-core": "github:robodomo/microservice-core",
     "mongoose": "^4.11.5",
     "mqtt": "^2.11.0",
     "superagent": "^3.5.2"
