@@ -197,7 +197,7 @@ class TVGuideHost extends HostBase {
     }
 
     async getChannels() {
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             debug(this.device, 'getChannels', this.guideId)
             if (!this.token) {
                 await this.getToken()
@@ -236,6 +236,7 @@ class TVGuideHost extends HostBase {
                     mapped:   this.map
                 })
                 resolve(this.map)
+                return this.map
             }
             catch (e) {
                 debug('getChannels error', e)
