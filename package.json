@@ -26,9 +26,9 @@
   },
   "homepage": "https://github.com/robodomo/tvguide-microservice#readme",
   "dependencies": {
-    "debug": "^2.6.8",
+    "debug": "^2.6.9",
     "microservice-core": "github:robodomo/microservice-core",
-    "mongoose": "^4.11.5",
-    "superagent": "^3.5.2"
+    "mongoose": "^4.13.14",
+    "superagent": "^3.8.3"
   }
 }
