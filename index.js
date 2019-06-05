@@ -3,6 +3,7 @@
 process.env.DEBUG = "TVGuideHost,HostBase";
 
 const debug = require("debug")("TVGuideHost"),
+  console = require("console"),
   HostBase = require("microservice-core/HostBase"),
   request = require("superagent"),
   crypto = require("crypto"),
@@ -12,7 +13,7 @@ const debug = require("debug")("TVGuideHost"),
 const POLL_TIME = 1000 * 60 * 60 * 24; // daily
 
 // Settings/Configuration (from ENV vars)
-const mqttHost = process.env.MQTT_HOST || "http://ha",
+const mqttHost = process.env.MQTT_HOST || "http://robodomo",
   topicRoot = process.env.TOPIC_ROOT || "tvguide",
   username = process.env.TVGUIDE_USERNAME,
   password = process.env.TVGUIDE_PASSWORD,
@@ -179,7 +180,12 @@ class TVGuideHost extends HostBase {
         map[channel(item.channel)] = info;
         // }
       } catch (e) {
-        console.dir(e);
+        console.log(
+          this.device,
+          "makeChannelsMap exception",
+          e.message,
+          e.stack
+        );
         map[channel(item.channel)] = info;
       }
     });
@@ -214,7 +220,12 @@ class TVGuideHost extends HostBase {
             map[channel(item.channel)] = info;
             // }
           } catch (e) {
-            console.dir(e);
+            console.log(
+              this.device,
+              "getChannels exception",
+              e.message,
+              e.stack
+            );
             map[channel(item.channel)] = info;
           }
         });
