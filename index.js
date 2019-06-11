@@ -1,6 +1,7 @@
 // TVGuide - manage TV channel information from schedulsdirect.org
 
 process.env.DEBUG = "TVGuideHost,HostBase";
+process.title = process.env.TITLE || "tvguide-microservice";
 
 const debug = require("debug")("TVGuideHost"),
   console = require("console"),
@@ -231,13 +232,13 @@ class TVGuideHost extends HostBase {
         });
         this.map = map;
         debug(this.device, "Got TV Guide");
-        const newData = Object.assign(
-          { _id: this.guideId, timestamp: new Date() },
-          {
-            channels: channels,
-            mapped: this.map
-          }
-        );
+        //        const newData = Object.assign(
+        //          { _id: this.guideId, timestamp: new Date() },
+        //          {
+        //            channels: channels,
+        //            mapped: this.map
+        //          }
+        //        );
         resolve(this.map);
         return this.map;
       } catch (e) {
