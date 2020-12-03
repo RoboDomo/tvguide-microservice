@@ -1,6 +1,7 @@
 // TVGuide - manage TV channel information from schedulsdirect.org
 
-process.env.DEBUG = "TVGuideHost,HostBase";
+process.env.DEBUG = "TVGuideHost";
+process.title = process.env.TITLE || "tvguide-microservice";
 
 const debug = require("debug")("TVGuideHost"),
   HostBase = require("microservice-core/HostBase"),
@@ -166,12 +167,12 @@ class TVGuideHost extends HostBase {
   makeChannelsMap(channels) {
     const stationIds = {};
 
-    channels.stations.forEach(item => {
+    channels.stations.forEach((item) => {
       stationIds[item.stationID] = item;
     });
 
     const map = {};
-    channels.map.forEach(item => {
+    channels.map.forEach((item) => {
       const info = stationIds[item.stationID];
 
       try {
@@ -202,11 +203,11 @@ class TVGuideHost extends HostBase {
       try {
         const channels = await this.channels();
         const stationIds = {};
-        channels.stations.forEach(item => {
+        channels.stations.forEach((item) => {
           stationIds[item.stationID] = item;
         });
         const map = {};
-        channels.map.forEach(item => {
+        channels.map.forEach((item) => {
           const info = stationIds[item.stationID];
 
           try {
@@ -219,12 +220,16 @@ class TVGuideHost extends HostBase {
           }
         });
         this.map = map;
-        debug(this.device, "Got TV Guide");
+        debug(
+          this.guideId,
+          "Got TV Guide",
+          JSON.stringify(channels).substr(0, 40)
+        );
         const newData = Object.assign(
           { _id: this.guideId, timestamp: new Date() },
           {
             channels: channels,
-            mapped: this.map
+            mapped: this.map,
           }
         );
         resolve(this.map);
@@ -240,6 +245,6 @@ class TVGuideHost extends HostBase {
 
 const guides = {};
 
-guideIds.forEach(guideId => {
+guideIds.forEach((guideId) => {
   guides[guideId] = new TVGuideHost(guideId);
 });

@@ -4,7 +4,7 @@
   "description": "TV Guide microservice for robodomo",
   "main": "index.js",
   "scripts": {
-    "start": "forever ./index.js",
+    "start": "./node_modules/.bin/forever --watch ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,6 +27,7 @@
   "homepage": "https://github.com/robodomo/tvguide-microservice#readme",
   "dependencies": {
     "debug": "^2.6.9",
+    "forever": "^3.0.4",
     "microservice-core": "github:robodomo/microservice-core",
     "mongoose": "^4.13.15",
     "superagent": "^3.8.3"

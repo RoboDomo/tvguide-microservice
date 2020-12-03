@@ -1,4 +1,4 @@
-FROM node:8
+FROM node:14
 ENV TZ=America/Los_Angeles
 RUN npm install forever -g
 RUN useradd --user-group --create-home --shell /bin/false app
